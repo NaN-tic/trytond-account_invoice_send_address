@@ -24,7 +24,7 @@ class Invoice:
             ],
         states={
             'readonly': Eval('state') != 'draft',
-            'invisible': ~Eval('type').in_(['out_invoice', 'out_credit_note']),
+            'invisible': Eval('type') != 'out',
             },
         depends=['state', 'party', 'type'],
         help="Address where the invoice will be sent to.")
