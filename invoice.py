@@ -26,7 +26,7 @@ class Invoice:
             'readonly': Eval('state') != 'draft',
             'invisible': Eval('type') != 'out',
             },
-        depends=['state', 'party', 'type'],
+        depends=['state', 'party', 'type'], ondelete='RESTRICT',
         help="Address where the invoice will be sent to.")
 
     def on_change_party(self):
