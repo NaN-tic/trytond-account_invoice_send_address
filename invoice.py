@@ -25,7 +25,7 @@ class Invoice:
             'readonly': Eval('state') != 'draft',
             'invisible': ~Eval('type').in_(['out_invoice', 'out_credit_note']),
             },
-        depends=['state', 'party', 'type'],
+        depends=['state', 'party', 'type'], ondelete='RESTRICT',
         help="Address where the invoice will be sent to.")
 
     def on_change_party(self):
