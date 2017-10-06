@@ -4,7 +4,7 @@ from trytond.model import fields
 from trytond.pool import PoolMeta
 from trytond.pyson import Eval
 
-__all__ = ['Address', 'Invoice', 'Sale']
+__all__ = ['Address', 'Invoice', 'ContractConsumption', 'Work', 'Sale']
 
 
 class Address:
@@ -31,17 +31,37 @@ class Invoice:
 
     def on_change_party(self):
         super(Invoice, self).on_change_party()
-        if self.party:
-            if self.type == 'out':
-                self.send_address = self.party.address_get(type='send_invoice')
-            else:
-                self.send_address = None
+        self.send_address = None
+        if self.party and self.type == 'out':
+            self.send_address = self.party.address_get(type='send_invoice')
 
     def _credit(self):
         values = super(Invoice, self)._credit()
         if self.send_address:
             values['send_address'] = self.send_address.id
         return values
+
+
+class ContractConsumption:
+    __metaclass__ = PoolMeta
+    __name__ = 'contract.consumption'
+
+    @classmethod
+    def _get_invoice(cls, keys):
+        invoice = super(ContractConsumption, cls)._get_invoice(keys)
+        invoice.send_address = invoice.party.address_get(type='send_invoice')
+        return invoice
+
+
+class Work:
+    __metaclass__ = PoolMeta
+    __name__ = 'project.work'
+
+    def _get_invoice(self):
+        # create invoice from project invoice or project invoice milestone
+        invoice = super(Work, self)._get_invoice()
+        invoice.send_address = self.party.address_get(type='send_invoice')
+        return invoice
 
 
 class Sale:
