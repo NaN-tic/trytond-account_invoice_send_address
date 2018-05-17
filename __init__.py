@@ -9,6 +9,12 @@ def register():
         invoice.Address,
         invoice.Invoice,
         invoice.Sale,
+        module='account_invoice_send_address', type_='model')
+    Pool.register(
         invoice.ContractConsumption,
+        depends=['contract'],
+        module='account_invoice_send_address', type_='model')
+    Pool.register(
         invoice.Work,
+        depends=['project_invoice'],
         module='account_invoice_send_address', type_='model')
