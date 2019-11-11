@@ -27,6 +27,7 @@ class Invoice(metaclass=PoolMeta):
         depends=['state', 'party', 'type'], ondelete='RESTRICT',
         help="Address where the invoice will be sent to.")
 
+    @fields.depends('type')
     def on_change_party(self):
         super(Invoice, self).on_change_party()
         self.send_address = None
