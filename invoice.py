@@ -34,11 +34,9 @@ class Invoice(metaclass=PoolMeta):
         if self.party and self.type == 'out':
             self.send_address = self.party.address_get(type='send_invoice')
 
-    def _credit(self, invoice_date):
-        credit = super(Invoice, self)._credit()
-        credit.invoice_date = invoice_date
-        credit.send_address = self.send_address
-        return credit
+    def _credit(self, **values):
+        values.setdefault('send_address', self.send_address)
+        return super()._credit(**values)
 
 
 class ContractConsumption(metaclass=PoolMeta):
