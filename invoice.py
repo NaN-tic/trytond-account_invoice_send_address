@@ -43,8 +43,8 @@ class ContractConsumption(metaclass=PoolMeta):
     __name__ = 'contract.consumption'
 
     @classmethod
-    def _get_invoice(cls, keys):
-        invoice = super(ContractConsumption, cls)._get_invoice(keys)
+    def _get_invoice(cls, keys, lines):
+        invoice = super(ContractConsumption, cls)._get_invoice(keys, lines)
         invoice.send_address = invoice.party.address_get(type='send_invoice')
         return invoice
 
