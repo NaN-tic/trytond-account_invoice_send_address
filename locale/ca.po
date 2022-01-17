@@ -1,4 +1,4 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
@@ -7,13 +7,13 @@ msgid "Send Address"
 msgstr "Adreça enviament"
 
 msgctxt "field:party.address,send_invoice:"
-msgid "Send invoice"
+msgid "Send Invoice"
 msgstr "Enviar factures"
-
-msgctxt "help:party.address,send_invoice:"
-msgid "Indicates if the address will the one used to send invoices to."
-msgstr "Indica que l'adreça s'utilitzará per enviar les factures."
 
 msgctxt "help:account.invoice,send_address:"
 msgid "Address where the invoice will be sent to."
 msgstr "Adreça a la qual s'enviaran les factures."
+
+msgctxt "help:party.address,send_invoice:"
+msgid "Indicates if the address will the one used to send invoices to."
+msgstr "Indica que l'adreça s'utilitzará per enviar les factures."
