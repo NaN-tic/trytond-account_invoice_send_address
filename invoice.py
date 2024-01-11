@@ -23,8 +23,7 @@ class Invoice(metaclass=PoolMeta):
         states={
             'readonly': Eval('state') != 'draft',
             'invisible': Eval('type') != 'out',
-            },
-        depends=['state', 'party', 'type'], ondelete='RESTRICT',
+            }, ondelete='RESTRICT',
         help="Address where the invoice will be sent to.")
 
     @fields.depends('type')
