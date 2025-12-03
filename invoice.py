@@ -61,7 +61,7 @@ class Work(metaclass=PoolMeta):
 class Sale(metaclass=PoolMeta):
     __name__ = 'sale.sale'
 
-    def _get_invoice_sale(self):
-        invoice = super(Sale, self)._get_invoice_sale()
+    def _get_invoice(self):
+        invoice = super(Sale, self)._get_invoice()
         invoice.send_address = self.party.address_get(type='send_invoice')
         return invoice
