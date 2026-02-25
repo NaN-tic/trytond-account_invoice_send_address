@@ -56,7 +56,7 @@ class Test(unittest.TestCase):
 
         # Create invoice without send address
         Invoice = Model.get('account.invoice')
-        invoice = Invoice()
+        invoice = Invoice(type='out')
         invoice.party = party
         self.assertEqual(invoice.invoice_address, address)
         self.assertEqual(invoice.send_address, address)
@@ -67,7 +67,7 @@ class Test(unittest.TestCase):
         party.save()
         _, send_address = party.addresses
         self.assertEqual(bool(send_address.send_invoice), True)
-        invoice = Invoice()
+        invoice = Invoice(type='out')
         invoice.party = party
         self.assertEqual(invoice.invoice_address, address)
         self.assertEqual(invoice.send_address, send_address)
